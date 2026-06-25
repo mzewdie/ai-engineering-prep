@@ -19,6 +19,8 @@ def display_user(data):
     print(f"Followers: {data['followers']}")
     print(f"Following: {data['following']}")
     print(f"Public repos: {data['public_repos']}")
+    print(f"Bio: {data['bio']}")
+    print(f"Created: {data['created_at']}")
     print("=" * 40)
 
 
