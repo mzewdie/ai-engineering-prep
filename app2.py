@@ -2,14 +2,19 @@ import requests
 
 
 def get_user(username):
-    url = f"https://api.github.com/users/{username}"
+    try:
+        url = f"https://api.github.com/users/{username}"
 
-    response = requests.get(url)
+        response = requests.get(url, timeout=1)
 
-    if response.status_code == 200:
-        return response.json()
+        if response.status_code == 200:
+            return response.json()
 
-    return None
+        return None
+
+    except requests.exceptions.RequestException as e:
+        print(f"Network error: {e}")
+        return None
 
 
 def display_user(data):
