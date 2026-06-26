@@ -42,6 +42,11 @@ while True:
         print()
 
         history.append(f"Assistant: {answer}")
+        
+        MAX_MESSAGES = 4
+
+        if len(history) > MAX_MESSAGES:
+            history = history[-MAX_MESSAGES:]
 
     except Exception as e:
         print(f"\nError: {e}\n")
