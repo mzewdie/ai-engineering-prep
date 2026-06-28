@@ -1,41 +1,44 @@
-from dotenv import load_dotenv
-from google import genai
-import os
+from gemini_client import ask_gemini
+from prompts import JSON_SYSTEM_PROMPT
 
-load_dotenv()
+class Chatbot:
 
-api_key = os.getenv("GEMINI_API_KEY")
+    def __init__(self, system_prompt):
+        self.system_prompt = system_prompt
+        self.history = []
 
-if not api_key:
-    raise ValueError("GEMINI_API_KEY not found")
+    def add_message(self, message):
+        #print(f"Adding message {message}")
+        self.history.append(message)
 
-client = genai.Client(api_key=api_key)
-
-print("Gemini Chatbot")
-print("Type 'quit' to exit.\n")
-
-while True:
-    prompt = input("You: ")
-
-    if prompt.lower() == "quit":
-        break
+    def show_history(self):
+        print("Printing content of history...")
+        for message in self.history:
+            print(message)
+            
+    def ask(self, question, task_prompt=""):
+        #print(f"A question is asked: {question}")
+        self.history.append(f"User: {question}")
+        prompt = self._build_prompt(task_prompt)
+        print(f"Asking with the prompt {prompt}")
+        answer = ask_gemini(prompt)
+        self.history.append(f"Gemini: {answer}")
+        return answer
     
-    print(f"User question is: {prompt}")
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+    def _build_prompt(self, question, task_prompt=""):
 
-        print("\nGemini:")
-        print(response.text)
-        print()
+        conversation = "\n".join(self.history)
+        
+        return f"""
+        {self.system_prompt}
 
-    except Exception as e:
-        #print(f"\nError: {e}\n")
-        print(type(e))
-        print(e)
+        {task_prompt}
 
-    print("\nGemini:")
-    print(response.text)
-    print()
+        Conversation:
+
+        {conversation}
+
+        User:
+
+        {question}
+        """
