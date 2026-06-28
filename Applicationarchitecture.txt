@@ -1,0 +1,23 @@
+ai-engineering-prep/
+│
+├── .venv/
+├── .env
+├── .gitignore
+├── requirements.txt
+├── README.md
+│
+├── main.py                 ← Program entry point
+│
+├── config.py               ← Configuration constants
+├── prompts.py              ← Prompt templates
+├── gemini_client.py        ← Gemini communication
+├── chatbot.py              ← Chatbot class (later)
+├── utils.py                ← Helper functions
+├── memory.py               ← Conversation memory (later)
+│
+├── examples/
+│
+├── tests/
+│
+└── docs/
+    └── AI_Engineering_Preparation_Notes.docx
