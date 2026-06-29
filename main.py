@@ -37,20 +37,7 @@ Question:
 {user_question}
 """
 
-#response = ask_gemini(prompt)
-
-""" chatbot1 = Chatbot()
-chatbot1.add_message("I am chatbot1")
-print(f"History in Chatbot1: {chatbot1.show_history()}")
-
-chatbot2= Chatbot()
-chatbot2.add_message("I am chatbot2")
-print(f"History in Chatbot2: {chatbot2.show_history()}") """
-
 bot = Chatbot(JSON_SYSTEM_PROMPT)
-#response = bot.ask(prompt)
-
-
 
 while True:
     question = input("Your Question: ")
@@ -60,13 +47,9 @@ while True:
 
     answer = bot.ask(question)
 
-    print("\nGemini:")
+    print("\nGemini's Answer:")
 
     print(answer)
 
-    print()
-    #bot.show_history()
-
-
-
-#print(response)
+    #print()
+ 

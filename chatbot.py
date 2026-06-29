@@ -17,10 +17,9 @@ class Chatbot:
             print(message)
             
     def ask(self, question, task_prompt=""):
-        #print(f"A question is asked: {question}")
         self.history.append(f"User: {question}")
         prompt = self._build_prompt(task_prompt)
-        print(f"Asking with the prompt {prompt}")
+        print(f"User Asking with the prompt: {prompt}")
         answer = ask_gemini(prompt)
         self.history.append(f"Gemini: {answer}")
         return answer
